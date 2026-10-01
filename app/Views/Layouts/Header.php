@@ -18,8 +18,22 @@
         <li><a href="<?php echo BASE_URL; ?>productos">Productos</a></li>
         <li><a href="<?php echo BASE_URL; ?>recetas">Recetas</a></li>
         <li><a href="<?php echo BASE_URL; ?>consejos">Consejos</a></li>
-        <li><a href="<?php echo BASE_URL; ?>login">Ingresar</a></li>
-        <li><a href="<?php echo BASE_URL; ?>registro">Registrarse</a></li>
+<?php if (isset($_SESSION['usuario_id'])): ?>
+    <li class="user-menu-item">
+        <a href="<?php echo BASE_URL; ?>perfil" class="user-link">
+            👤 <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?>
+        </a>
+        <ul class="dropdown-menu">
+            <?php if (isset($_SESSION['rol_id']) && $_SESSION['rol_id'] == 1): ?>
+                <li><a href="<?php echo BASE_URL; ?>admin/dashboard">Panel Admin</a></li>
+            <?php endif; ?>
+            <li><a href="<?php echo BASE_URL; ?>logout">Cerrar Sesión</a></li>
+        </ul>
+    </li>
+<?php else: ?>
+    <li><a href="<?php echo BASE_URL; ?>login">Ingresar</a></li>
+    <li><a href="<?php echo BASE_URL; ?>registro">Registrarse</a></li>
+<?php endif; ?>
     </ul>
 </nav>
     </header>
